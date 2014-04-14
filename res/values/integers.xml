@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="polling_interval">5000</integer>
+    <integer name="video_buffering_padding">2</integer>
+    <integer name="back_button_in_webview">0</integer>
+</resources>

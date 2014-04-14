@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="eu.codebits.plasmas"
+          android:versionCode="1"
+          android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="16" />
+
+    <application
+        android:clearTaskOnLaunch="true"
+        android:finishOnTaskLaunch="true"
+        android:allowBackup="true"
+        android:launchMode="singleTop"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <!-- Our webview activity, which is launched from the other -->
+        <activity
+            android:name=".FullScreenWebViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullScreenTheme" >
+        </activity>
+        
+        <!-- This is the launcher activity - a stub that starts the polling service -->
+        <activity
+            android:name=".InvisibleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="eu.codebits.plasmas.action.DisplayItem"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- this polls the server for updates -->
+        <service android:name=".services.PollingService"/>
+
+        <!-- this handles each item and controls the webview -->
+        <service android:name=".services.PlayerService"/>
+
+        <!-- this handles playlist updates -->
+        <receiver android:name=".receivers.PlayerReceiver">
+            <intent-filter>
+                <action android:name="eu.codebits.plasmas.action.PlaylistUpdate"/>
+            </intent-filter>
+        </receiver>
+        
+        <receiver android:name=".receivers.StartingReceiver">
+            <intent-filter>
+                <action android:name="eu.codebits.plasmas.action.StartPolling"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

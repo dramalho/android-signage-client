@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Plasma Player</string>
+    <string name="initial_url" formatted="false"><![CDATA[https://server.local/static/index.html]]></string>
+    <string name="polling_url" formatted="false"><![CDATA[https://server.local/signage/api/v1/assetlist/]]></string>
+    <string name="blank_page" formatted="false"><![CDATA[<style>body{background:black;}</style>]]></string>
+    <string name="video_template" formatted="false"><![CDATA[
+        <html><head><meta name=\"viewport\" content=\"width=1280, user-scalable=no\"/></head>
+        <body style=\"background-color: black; color: white; border: 0px; padding: 0px; margin: 0px;\">
+            <video id=\"v\" width=\"100%\" height=\"100%\" style=\"position: absolute; left: 0px; top: 2000px;\">
+                <source src=\"%s\" type=\"video/mp4\">
+            </video>
+            <script>
+                v = document.getElementById(\"v\");
+                v.addEventListener(\"timeupdate\",function(){
+                    if(v.currentTime > 0) { v.style.top=0; }
+                });
+                v.addEventListener(\"ended\",function(){ v.style.top=2000; });
+                v.play();
+            </script>
+        </body></html>]]></string>
+</resources>
