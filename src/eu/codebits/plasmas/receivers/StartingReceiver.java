@@ -14,7 +14,6 @@ import eu.codebits.plasmas.services.PollingService;
 import eu.codebits.plasmas.R;
 import static eu.codebits.plasmas.util.NetworkInterfaces.getIPAddress;
 import static eu.codebits.plasmas.util.NetworkInterfaces.getMACAddress;
-import static eu.codebits.plasmas.util.TrustManager.overrideCertificateChainValidation;
 
 
 public class StartingReceiver extends WakefulBroadcastReceiver {

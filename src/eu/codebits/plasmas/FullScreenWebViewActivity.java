@@ -23,7 +23,6 @@ import android.widget.Toast;
 import static eu.codebits.plasmas.util.NetworkInterfaces.getIPAddress;
 import static eu.codebits.plasmas.util.NetworkInterfaces.getMACAddress;
 import eu.codebits.plasmas.util.SystemUiHider;
-import static eu.codebits.plasmas.util.TrustManager.overrideCertificateChainValidation;
 import java.net.URI;
 
 /**

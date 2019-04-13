@@ -20,7 +20,6 @@ import android.util.Log;
 import eu.codebits.plasmas.receivers.PlayerReceiver;
 import eu.codebits.plasmas.receivers.StartingReceiver;
 import static eu.codebits.plasmas.services.PlayerService.PARAM_PLAYLIST_INDEX;
-import static eu.codebits.plasmas.util.TrustManager.overrideCertificateChainValidation;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,7 +40,6 @@ public class PollingService extends IntentService {
 
     // these need to persist across instantiations
     private static final String TAG = "PollingService";
-    private static final HostnameVerifier trustingHostnameVerifier = overrideCertificateChainValidation();
             
     private Intent originalIntent;
     
@@ -61,9 +59,6 @@ public class PollingService extends IntentService {
         originalIntent = intent;
         //Log.d(TAG, "Starting polling task");
         
-        if(trustingHostnameVerifier != null) {
-            HttpsURLConnection.setDefaultHostnameVerifier(trustingHostnameVerifier);
-        }
         if(PlayerService.alerts == null) {
             new PollingTask().execute(intent.getData().toString());
         }
